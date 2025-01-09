@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import logo from "./assets/reddit-logo-reddit-icon-transparent-free-png.webp";
 import Navbar from "./Navbar";
@@ -10,7 +10,7 @@ function App() {
   const [userNameOutput, setUserNameOutput] = useState(0);
   const [data, setData] = useState("");
   const [outputClass, setOutputClass] = useState(
-    "row justify-content-center output"
+    "invalid"
   );
 
   const handleSubmit = async (e) => {
@@ -18,20 +18,33 @@ function App() {
     checkUsernameAvailability(data);
   };
 
+  const isValidUsername = (username) => {
+    const usernameRegex = /^[a-zA-Z0-9-_]{3,20}$/;
+    return usernameRegex.test(username);
+  };
+
   const checkUsernameAvailability = debounce(async (username) => {
+
     if (!username) {
       setShowOutput(false);
       return;
     }
 
+    if (!isValidUsername(username)) {
+      setUserNameOutput("invalid. Ensure the username satisfies the requirements mentioned below.");
+      setShowOutput(true);
+      setOutputClass("invalid");
+      return;
+    }
+
     try {
-      const res = await axios.post("/check", { username });
+      const res = await axios.post("https://blinku157.pythonanywhere.com/check", { username });
       setUserNameOutput(res.data);
 
       if (res.data === "available") {
-        setOutputClass(outputClass.replace("output", "available"));
+        setOutputClass("available");
       } else {
-        setOutputClass("row justify-content-center output");
+        setOutputClass("invalid");
       }
 
       setShowOutput(true);
@@ -74,10 +87,30 @@ function App() {
             </form>
 
             {showOutput && (
-              <div className={outputClass}>
+              <div className={`row justify-content-center text-center ${outputClass}`}>
                 The username is {userNameOutput}
               </div>
             )}
+
+            <div className="requirements">
+              <div className="row justify-content-center mt-4">
+                <div className="col-12 col-md-6">
+                  <div className="row justify-content-center">
+                    <div className="col-12 text-center">
+                      <h3>Requirements</h3>
+                    </div>
+                  </div>
+                  <div className="row justify-content-center">
+                    <div className="col-12">
+                      <ul>
+                        <li>Username should be between 3 to 20 characters long.</li>
+                        <li>Username can only contain alphanumeric characters, hyphens and underscores.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
     </>
