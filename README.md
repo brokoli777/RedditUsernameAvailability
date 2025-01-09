@@ -1,5 +1,7 @@
 # Reddit Username Availability Checker
 
+[https://redditalias.bregwin.com](https://redditalias.bregwin.com/)
+
 ![alt text](image.png)
 
 Ever wanted to find a unique reddit account without spending time in the user registration page? This website lets find your perfect username.
