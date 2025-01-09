@@ -1,0 +1,67 @@
+.App {
+  text-align: center;
+ 
+}
+
+.main_title{
+  /* margin-top: 10px; */
+  color: antiquewhite;
+  margin-top: 70px;
+  font-size: 90px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+@media (max-width: 768px) {
+  .main_title{
+    font-size: 40px;
+  }
+}
+
+
+
+
+.output{
+  font-size: large;
+  color: coral;
+}
+
+.available{
+  color: greenyellow;
+  font-size: large;
+}
+
+
+.reddit_logo{
+  max-height: 110px;
+}
+
+
+
+.searchContainer{
+  width: 70%;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .searchContainer{
+    width: 90%;
+  }
+}
+
+
+
+
+.infoText{
+  padding: 15px;
+  color: antiquewhite;
+  text-align: center;
+}
+
+.searchArea{
+  background-color: rgb(246, 240, 233);
+}
+
